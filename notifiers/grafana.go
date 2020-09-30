@@ -47,6 +47,7 @@ func (n *grafanaNotifier) Send(notification Notification, tags string) error {
 
 	client := &http.Client{
 		Transport: httputil.NewLoggingRoundTripper(&http.Transport{
+			Proxy: http.ProxyFromEnvironment,
 			TLSClientConfig: &tls.Config{
 				InsecureSkipVerify: n.opts.InsecureSkipVerify,
 			},

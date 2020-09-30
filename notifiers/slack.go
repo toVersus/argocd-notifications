@@ -41,6 +41,7 @@ func NewSlackNotifier(opts SlackOptions) Notifier {
 
 func (n *slackNotifier) Send(notification Notification, recipient string) error {
 	transport := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: n.opts.InsecureSkipVerify,
 		},
